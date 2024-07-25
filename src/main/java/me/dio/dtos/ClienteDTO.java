@@ -1,29 +1,13 @@
-package me.dio.models;
+package me.dio.dtos;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+public class ClienteDTO {
 
-@Entity
-public class Cliente {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
     private String cpf;
     private String nome;
     private String email;
     private String senha;
     private String endereco;
     private String telefone;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
     public String getNome() {
         return nome;
@@ -73,3 +57,4 @@ public class Cliente {
         this.cpf = cpf;
     }
 }
+
