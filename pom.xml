@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>me.dio</groupId>
-	<artifactId>santander-bootcamp-java</artifactId>
+	<artifactId>santander-bootcamp-java-pixxaria</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>santander-bootcamp-java</name>
 	<description>Java RESTful API criada nos estudos do Bootcamp Santander 2024 - Backend com Java</description>
@@ -44,11 +44,19 @@
 			<artifactId>h2</artifactId>
 			<scope>runtime</scope>
 		</dependency>
+
+<!--		<dependency>-->
+<!--			<groupId>org.postgresql</groupId>-->
+<!--			<artifactId>postgresql</artifactId>-->
+<!--			<scope>runtime</scope>-->
+<!--		</dependency>-->
+
 		<dependency>
-			<groupId>org.postgresql</groupId>
-			<artifactId>postgresql</artifactId>
+			<groupId>com.mysql</groupId>
+			<artifactId>mysql-connector-j</artifactId>
 			<scope>runtime</scope>
 		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
