@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PizzaService {
@@ -25,5 +26,9 @@ public class PizzaService {
 
     public List<Pizza> listarTodas() {
         return pizzaRepository.findAll();
+    }
+
+    public Pizza detalhes(Integer id) {
+        return pizzaRepository.findById(id).orElseThrow(() -> new RuntimeException("Pizza nao encontrada com o ID " + id));
     }
 }

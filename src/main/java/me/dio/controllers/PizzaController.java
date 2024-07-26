@@ -33,4 +33,10 @@ public class PizzaController {
         pizzasCadastradas = pizzaService.listarTodas();
         return ResponseEntity.ok(pizzasCadastradas);
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Pizza> consultarPizza(@PathVariable Integer id) {
+        Pizza pizzaProcurada = pizzaService.detalhes(id);
+        return ResponseEntity.ok(pizzaProcurada);
+    }
 }
