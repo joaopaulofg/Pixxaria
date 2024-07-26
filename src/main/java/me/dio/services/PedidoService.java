@@ -58,4 +58,8 @@ public class PedidoService {
     private Double calculaValorTotal(List<PedidoItem> itens) {
         return itens.stream().mapToDouble(item -> item.getPizza().getPreco() * item.getQuantidade()).sum();
     }
+
+    public List<Pedido> historicoCliente(Cliente cliente) {
+        return pedidoRepository.findByCliente(cliente);
+    }
 }
