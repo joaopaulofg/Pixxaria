@@ -21,14 +21,13 @@ public class ClienteController {
 
     @PostMapping
     public ResponseEntity<?> registrarCliente(@RequestBody @Valid ClienteDTO cliente) {
-        Cliente novoCliente = clienteService.salvar(cliente);
-
-        if(novoCliente != null) {
+        try{
+            Cliente novoCliente = clienteService.salvar(cliente);
             return ResponseEntity.ok(novoCliente);
-        } else {
-            return new ResponseEntity<>("CPF informado ja estah cadastrado...", HttpStatus.OK);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
         }
-
     }
+
 
 }

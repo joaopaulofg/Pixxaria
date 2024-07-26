@@ -16,18 +16,12 @@ public class ClienteService {
     @Autowired
     private PedidoRepository pedidoRepository;
 
-    public Cliente salvar(ClienteDTO cliente) {
-        if(clienteRepository.findByCpf(cliente.getCpf()).isPresent()){
-            return null;
+    public Cliente salvar(ClienteDTO clienteDTO) {
+        if(clienteRepository.findByCpf(clienteDTO.getCpf()).isPresent()){
+            throw new IllegalArgumentException("Cliente com o CPF " + clienteDTO.getCpf() + " já existe");
         } else {
-            Cliente novoCliente = new Cliente();
-            novoCliente.setCpf(cliente.getCpf());
-            novoCliente.setEmail(cliente.getEmail());
-            novoCliente.setNome(cliente.getNome());
-            novoCliente.setEndereco(cliente.getEndereco());
-            novoCliente.setSenha(cliente.getSenha());
-            novoCliente.setTelefone(cliente.getTelefone());
-            return clienteRepository.save(novoCliente);
+            Cliente cliente = Cliente.fromDTO(clienteDTO);
+            return clienteRepository.save(cliente);
         }
     }
 }

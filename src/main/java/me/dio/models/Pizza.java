@@ -1,6 +1,7 @@
 package me.dio.models;
 
 import jakarta.persistence.*;
+import me.dio.dtos.PizzaDTO;
 import me.dio.enums.TamanhoPizza;
 
 @Entity
@@ -51,6 +52,15 @@ public class Pizza {
 
     public void setTamanho(TamanhoPizza tamanho) {
         this.tamanho = tamanho;
+    }
+
+    public static Pizza fromPizzaDTO(PizzaDTO pizzaDTO) {
+        Pizza pizza = new Pizza();
+        pizza.setNome(pizzaDTO.getNome());
+        pizza.setDescricao(pizzaDTO.getDescricao());
+        pizza.setPreco(pizzaDTO.getPreco());
+        pizza.setTamanho(pizzaDTO.getTamanho());
+        return pizza;
     }
 }
 
