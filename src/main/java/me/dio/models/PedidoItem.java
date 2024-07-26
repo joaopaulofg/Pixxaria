@@ -1,19 +1,22 @@
 package me.dio.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import jakarta.persistence.*;
 
 @Entity
 public class PedidoItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private Integer pedidoId;
-    private Integer pizzaId;
+
+    @ManyToOne
+    @JsonBackReference
+    private Pedido pedido;
+
+    @ManyToOne
+    private Pizza pizza;
+
     private Integer quantidade;
-    private Double precoUnitario;
 
     public Integer getId() {
         return id;
@@ -23,20 +26,20 @@ public class PedidoItem {
         this.id = id;
     }
 
-    public Integer getPedidoId() {
-        return pedidoId;
+    public Pedido getPedido() {
+        return pedido;
     }
 
-    public void setPedidoId(Integer pedidoId) {
-        this.pedidoId = pedidoId;
+    public void setPedido(Pedido pedido) {
+        this.pedido = pedido;
     }
 
-    public Integer getPizzaId() {
-        return pizzaId;
+    public Pizza getPizza() {
+        return pizza;
     }
 
-    public void setPizzaId(Integer pizzaId) {
-        this.pizzaId = pizzaId;
+    public void setPizza(Pizza pizza) {
+        this.pizza = pizza;
     }
 
     public Integer getQuantidade() {
@@ -45,13 +48,5 @@ public class PedidoItem {
 
     public void setQuantidade(Integer quantidade) {
         this.quantidade = quantidade;
-    }
-
-    public Double getPrecoUnitario() {
-        return precoUnitario;
-    }
-
-    public void setPrecoUnitario(Double precoUnitario) {
-        this.precoUnitario = precoUnitario;
     }
 }
