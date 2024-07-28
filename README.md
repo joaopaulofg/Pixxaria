@@ -1,6 +1,6 @@
 # Sistema de Pizzaria
 
-Um sistema de gerenciamento para pizzarias desenvolvido com Java, Spring Boot e MySQL. O projeto permite que clientes façam pedidos, enquanto os funcionários podem gerenciar o cardápio e os pedidos.
+Um sistema de gerenciamento para pizzarias desenvolvido com Java, Spring Boot e utilizando JPA e MySQL para persistência. O projeto permite que clientes façam pedidos, enquanto os funcionários podem gerenciar o cardápio e os pedidos.
 
 ## Funcionalidades
 
@@ -17,7 +17,7 @@ Um sistema de gerenciamento para pizzarias desenvolvido com Java, Spring Boot e 
 ## Tecnologias Utilizadas
 
 - **Backend**: Java, Spring Boot
-- **Banco de Dados**: MySQL
+- **Banco de Dados**: JPA e MySQL
 - **Documentação da API**: Swagger
 - **Gerenciamento de Dependências**: Maven
 
