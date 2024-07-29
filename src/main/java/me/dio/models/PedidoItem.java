@@ -14,9 +14,18 @@ public class PedidoItem {
     private Pedido pedido;
 
     @ManyToOne
-    private Pizza pizza;
+    @JoinColumn(name = "pizza_preco_id", nullable = false)
+    private PizzaPreco pizza;
 
     private Integer quantidade;
+
+    public PizzaPreco getPizza() {
+        return pizza;
+    }
+
+    public void setPizza(PizzaPreco pizzaPreco) {
+        this.pizza = pizzaPreco;
+    }
 
     public Integer getId() {
         return id;
@@ -32,14 +41,6 @@ public class PedidoItem {
 
     public void setPedido(Pedido pedido) {
         this.pedido = pedido;
-    }
-
-    public Pizza getPizza() {
-        return pizza;
-    }
-
-    public void setPizza(Pizza pizza) {
-        this.pizza = pizza;
     }
 
     public Integer getQuantidade() {

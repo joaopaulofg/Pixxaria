@@ -14,6 +14,16 @@ public class Pizza {
     @Enumerated(EnumType.STRING)
     private TamanhoPizza tamanho;
 
+    public boolean isDisponivel() {
+        return disponivel;
+    }
+
+    public void setDisponivel(boolean disponivel) {
+        this.disponivel = disponivel;
+    }
+
+    private boolean disponivel = true;
+
     public Integer getId() {
         return id;
     }

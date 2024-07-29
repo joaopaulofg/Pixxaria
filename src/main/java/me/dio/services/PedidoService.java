@@ -10,6 +10,7 @@ import me.dio.models.PedidoItem;
 import me.dio.models.Pizza;
 import me.dio.repositories.ClienteRepository;
 import me.dio.repositories.PedidoRepository;
+import me.dio.repositories.PizzaPrecoRepository;
 import me.dio.repositories.PizzaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,6 +31,11 @@ public class PedidoService {
     @Autowired
     private PizzaRepository pizzaRepository;
 
+    @Autowired
+    private PizzaPrecoRepository precoRepository;
+    @Autowired
+    private PizzaPrecoRepository pizzaPrecoRepository;
+
     public Pedido criarPedido(PedidoDTO pedidoDTO) {
         Cliente cliente = clienteRepository.findById(pedidoDTO.getClienteId()).orElseThrow(() -> new ResourceNotFoundException("Cliente com id " + pedidoDTO.getClienteId() + " nao cadastrado."));
 
@@ -41,7 +47,7 @@ public class PedidoService {
         for(PedidoItemDTO pedidoItemDTO : pedidoDTO.getItens()) {
             Pizza pizza = pizzaRepository.findById(pedidoItemDTO.getPizzaId()).orElseThrow(() -> new ResourceNotFoundException("Pizza com id " + pedidoItemDTO.getPizzaId() + " nao cadstrada."));
             PedidoItem pedidoItem = new PedidoItem();
-            pedidoItem.setPizza(pizza);
+            pedidoItem.setPizza(pizzaPrecoRepository.findByPizzaAndDataFimIsNull(pizza));
             pedidoItem.setQuantidade(pedidoItemDTO.getQuantidade());
             pedidoItem.setPedido(pedido);
             itens.add(pedidoItem);
