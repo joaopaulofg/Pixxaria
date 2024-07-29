@@ -1,4 +1,4 @@
-# Sistema de Pizzaria
+# Sistema de Pixxaria
 
 Um sistema de gerenciamento para pizzarias desenvolvido com Java, Spring Boot e utilizando JPA e MySQL para persistência. O projeto permite que clientes façam pedidos, enquanto os funcionários podem gerenciar o cardápio e os pedidos.
 
