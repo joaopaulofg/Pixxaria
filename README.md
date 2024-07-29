@@ -69,16 +69,19 @@ http://localhost:8080/swagger-ui.html
 
 - **Clientes**
   - `POST /clientes` - Cadastrar um novo cliente
-  - `GET /clientes/{id}` - Consultar informações de um cliente
+  - `GET /clientes/{idCliente}` - Consultar informações de um cliente
 
 - **Pedidos**
   - `POST /pedidos` - Criar um novo pedido
-  - `GET /pedidos/{id}` - Consultar detalhes de um pedido
+  - `GET /pedidos/{idPedido}` - Consultar detalhes de um pedido
 
 - **Pizza**
-  - `POST /pizzas` - Adicionar uma nova pizza ao cardápio
-  - `GET /pizzas/{id}` - Consultar detalhes de uma pizza
-  - `GET /pizzas` - Listar o cardápio com as pizzas cadastradas
+  - `POST /pizzas` - Adicionar uma nova pizza ao cardápio.
+  - `GET /pizzas/{idPizza}` - Consultar detalhes de uma pizza.
+  - `GET /pizzas` - Listar o cardápio com as pizzas cadastradas.
+  - `DELETE /pizzas/{idPizza}` - Deletar uma pizza do cardápio.
+  - `PUT /pizzas/{idPizza}` - Atualizar uma pizza no cardápio.
+
 
 ## Contribuição
 
