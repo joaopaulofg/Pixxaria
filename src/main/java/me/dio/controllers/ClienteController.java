@@ -1,6 +1,8 @@
 package me.dio.controllers;
 
-import me.dio.dtos.ClienteDTO;
+import me.dio.dtos.ClienteCreateDTO;
+import me.dio.dtos.ClienteResponseDTO;
+import me.dio.dtos.PedidoDTO;
 import me.dio.exceptions.ResourceNotFoundException;
 import me.dio.models.*;
 import me.dio.services.ClienteService;
@@ -19,19 +21,19 @@ public class ClienteController {
     private ClienteService clienteService;
 
     @PostMapping
-    public ResponseEntity<?> registrarCliente(@RequestBody @Valid ClienteDTO cliente) {
+    public ResponseEntity<?> registrarCliente(@RequestBody @Valid ClienteCreateDTO cliente) {
         try{
-            Cliente novoCliente = clienteService.salvar(cliente);
+            ClienteResponseDTO novoCliente = clienteService.salvar(cliente);
             return ResponseEntity.ok(novoCliente);
         } catch (ResourceNotFoundException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<?> consultarHistorico(@PathVariable Integer id) {
+    @GetMapping("/{idCliente}")
+    public ResponseEntity<?> consultarHistorico(@PathVariable Integer idCliente) {
         try {
-            List<Pedido> historico = clienteService.consultarHistoricoPedidos(id);
+            List<PedidoDTO> historico = clienteService.consultarHistoricoPedidos(idCliente);
             return ResponseEntity.ok(historico);
         } catch (ResourceNotFoundException e) {
             return ResponseEntity.badRequest().body(e.getMessage());

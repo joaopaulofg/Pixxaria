@@ -4,7 +4,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import me.dio.dtos.ClienteDTO;
+import me.dio.dtos.ClienteCreateDTO;
 
 @Entity
 public class Cliente {
@@ -74,7 +74,7 @@ public class Cliente {
         this.cpf = cpf;
     }
 
-    public static Cliente fromDTO(ClienteDTO clienteDTO) {
+    public static Cliente fromDTO(ClienteCreateDTO clienteDTO) {
         Cliente novoCliente = new Cliente();
         novoCliente.setCpf(clienteDTO.getCpf());
         novoCliente.setEmail(clienteDTO.getEmail());

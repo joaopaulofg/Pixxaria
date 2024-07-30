@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class PedidoService {
@@ -65,7 +66,19 @@ public class PedidoService {
         return itens.stream().mapToDouble(item -> item.getPizza().getPreco() * item.getQuantidade()).sum();
     }
 
-    public List<Pedido> historicoCliente(Cliente cliente) {
-        return pedidoRepository.findByCliente(cliente);
+    public List<PedidoDTO> historicoCliente(Cliente cliente) {
+        List<Pedido> pedidos = pedidoRepository.findByCliente(cliente);
+        return pedidos.stream().map(PedidoDTO::fromEntity).collect(Collectors.toList());
+    }
+
+    public Pedido atualizarPedido(Integer idPedido, Status novoStatus) {
+        Pedido pedido = pedidoRepository.findById(idPedido).orElseThrow(() -> new ResourceNotFoundException("Pedido com id " + idPedido + " nao encontrado."));
+        pedido.setStatus(novoStatus);
+        return pedidoRepository.save(pedido);
+    }
+
+    public PedidoDTO consultarPedido(Integer idPedido) {
+        Pedido pedido = pedidoRepository.findById(idPedido).orElseThrow(() -> new ResourceNotFoundException("Pedido nao encontrado."));
+        return PedidoDTO.fromEntity(pedido);
     }
 }
