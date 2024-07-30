@@ -1,6 +1,8 @@
 package me.dio.controllers;
 
 import jakarta.validation.Valid;
+import me.dio.dtos.LoginResponseDTO;
+import me.dio.infra.security.TokenService;
 import me.dio.models.user.User;
 import me.dio.dtos.AuthenticationDTO;
 import me.dio.dtos.RegisterDTO;
@@ -23,18 +25,22 @@ public class AuthenticationController {
     private AuthenticationManager authenticationManager;
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private TokenService tokenService;
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody @Valid AuthenticationDTO data){
         var usernamePassword = new UsernamePasswordAuthenticationToken(data.login(), data.password());
         var authentication = this.authenticationManager.authenticate(usernamePassword);
 
-        return ResponseEntity.ok().build();
+        var token = tokenService.generateToken((User) authentication.getPrincipal());
+
+        return ResponseEntity.ok(new LoginResponseDTO(token));
     }
 
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody @Valid RegisterDTO data){
-        if(this.userRepository.findByLogin(data.login()) != null) return ResponseEntity.ok().build();
+        if(this.userRepository.findByLogin(data.login()) != null) return ResponseEntity.badRequest().build();
         String encryptedPassword = new BCryptPasswordEncoder().encode(data.password());
         User newUser = new User(data.login(), data.nome(),encryptedPassword, data.role());
         userRepository.save(newUser);
