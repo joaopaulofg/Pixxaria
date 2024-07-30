@@ -52,12 +52,7 @@ Um sistema de gerenciamento para pizzarias desenvolvido com Java, Spring Boot e 
     spring.datasource.password=sua_senha
     ```
 
-3. **Compile e execute o projeto**
-
-    ```bash
-    mvn clean install
-    mvn spring-boot:run
-    ```
+3. **Inicie a aplicação!**
 
 ## Uso da API
 
@@ -69,11 +64,12 @@ http://localhost:8080/swagger-ui.html
 
 - **Clientes**
   - `POST /clientes` - Cadastrar um novo cliente
-  - `GET /clientes/{idCliente}` - Consultar informações de um cliente
+  - `GET /clientes/{idCliente}` - Consultar historico de um cliente
 
 - **Pedidos**
   - `POST /pedidos` - Criar um novo pedido
   - `GET /pedidos/{idPedido}` - Consultar detalhes de um pedido
+  - `PUT /pedidos/{idPedido}` - Atualizar o status de um pedido
 
 - **Pizza**
   - `POST /pizzas` - Adicionar uma nova pizza ao cardápio.
