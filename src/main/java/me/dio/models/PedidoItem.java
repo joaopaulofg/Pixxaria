@@ -2,7 +2,11 @@ package me.dio.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
+@Setter
+@Getter
 @Entity
 public class PedidoItem {
     @Id
@@ -19,35 +23,4 @@ public class PedidoItem {
 
     private Integer quantidade;
 
-    public PizzaPreco getPizza() {
-        return pizza;
-    }
-
-    public void setPizza(PizzaPreco pizzaPreco) {
-        this.pizza = pizzaPreco;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public Pedido getPedido() {
-        return pedido;
-    }
-
-    public void setPedido(Pedido pedido) {
-        this.pedido = pedido;
-    }
-
-    public Integer getQuantidade() {
-        return quantidade;
-    }
-
-    public void setQuantidade(Integer quantidade) {
-        this.quantidade = quantidade;
-    }
 }

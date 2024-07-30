@@ -1,7 +1,9 @@
 package me.dio.dtos;
 
+import lombok.Getter;
 import me.dio.models.Cliente;
 
+@Getter
 public class ClienteResponseDTO {
 
     private String nome;
@@ -14,11 +16,4 @@ public class ClienteResponseDTO {
         return clienteResponseDTO;
     }
 
-    public String getNome() {
-        return nome;
-    }
-
-    public String getEmail() {
-        return email;
-    }
 }

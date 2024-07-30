@@ -1,11 +1,15 @@
 package me.dio.dtos;
 
+import lombok.Getter;
+import lombok.Setter;
 import me.dio.models.Pedido;
 import me.dio.models.PedidoItem;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Setter
+@Getter
 public class PedidoDTO {
     private Integer clienteId;
     private String clienteNome;
@@ -26,27 +30,4 @@ public class PedidoDTO {
         return pedidoDTO;
     }
 
-    public void setClienteNome(String clienteNome) {
-        this.clienteNome = clienteNome;
-    }
-
-    public String getClienteNome() {
-        return clienteNome;
-    }
-
-    public Integer getClienteId() {
-        return clienteId;
-    }
-
-    public void setClienteId(Integer clienteId) {
-        this.clienteId = clienteId;
-    }
-
-    public List<PedidoItemDTO> getItens() {
-        return itens;
-    }
-
-    public void setItens(List<PedidoItemDTO> itens) {
-        this.itens = itens;
-    }
 }
