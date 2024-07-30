@@ -1,8 +1,9 @@
-package me.dio.models.user;
+package me.dio.enums;
 
 public enum UserRole {
     CLIENTE("cliente"),
-    FUNCIONARIO("funcionario");
+    FUNCIONARIO("funcionario"),
+    DONO("dono");
 
     private String role;
 
