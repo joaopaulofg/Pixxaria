@@ -2,6 +2,7 @@ package me.dio.services;
 
 import me.dio.dtos.pedido.PedidoDTO;
 import me.dio.dtos.pedido.PedidoItemDTO;
+import me.dio.dtos.pedido.PedidoResponseDTO;
 import me.dio.enums.Status;
 import me.dio.exceptions.ResourceNotFoundException;
 import me.dio.models.user.User;
@@ -34,7 +35,7 @@ public class PedidoService {
     @Autowired
     private PizzaPrecoRepository pizzaPrecoRepository;
 
-    public Pedido criarPedido(PedidoDTO pedidoDTO) {
+    public PedidoResponseDTO criarPedido(PedidoDTO pedidoDTO) {
         User user = userRepository.findById(pedidoDTO.getUserId()).orElseThrow(() -> new ResourceNotFoundException("Cliente com id " + pedidoDTO.getUserId() + " nao cadastrado."));
 
         Pedido pedido = new Pedido();
@@ -55,9 +56,9 @@ public class PedidoService {
         pedido.setStatus(Status.PREPARANDO);
         pedido.setDataCriacao(new Date());
         pedido.setValorTotal(calculaValorTotal(itens));
+        pedidoRepository.save(pedido);
 
-
-        return pedidoRepository.save(pedido);
+        return new PedidoResponseDTO(user.getLogin(), user.getNome(), itens);
     }
 
     private Double calculaValorTotal(List<PedidoItem> itens) {

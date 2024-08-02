@@ -21,8 +21,8 @@ public class PedidoController {
     @PostMapping
     public ResponseEntity<?> criarPedido(@RequestBody @Valid PedidoDTO pedidoDTO) {
         try {
-            Pedido novoPedido = pedidoService.criarPedido(pedidoDTO);
-            return ResponseEntity.status(HttpStatus.CREATED).body(novoPedido);
+            PedidoResponseDTO pedidoCriado = pedidoService.criarPedido(pedidoDTO);
+            return ResponseEntity.status(HttpStatus.CREATED).body(pedidoCriado);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }

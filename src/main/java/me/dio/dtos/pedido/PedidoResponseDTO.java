@@ -1,21 +1,27 @@
 package me.dio.dtos.pedido;
 
-import me.dio.dtos.UserResponseDTO;
-import me.dio.models.Pedido;
+import lombok.Getter;
+import lombok.Setter;
 import me.dio.models.PedidoItem;
 
+import java.util.ArrayList;
 import java.util.List;
 
+@Getter
+@Setter
 public class PedidoResponseDTO {
 
-    private UserResponseDTO user;
-    private List<PedidoItem> itens;
+    private String nomeUsuario;
+    private String loginUsuario;
+    private  List<PedidoItemResponseDTO> itensPedido = new ArrayList<>();
 
-    public PedidoResponseDTO(UserResponseDTO user, List<PedidoItem> itens) {
-        this.user = user;
-        this.itens = itens;
+    public PedidoResponseDTO(String login, String nome, List<PedidoItem> itens) {
+        this.loginUsuario = login;
+        this.nomeUsuario = nome;
+        for (PedidoItem item : itens) {
+            this.itensPedido.add(
+                    PedidoItemResponseDTO.fromEntity(item)
+            );
+        }
     }
-
-
-
 }
