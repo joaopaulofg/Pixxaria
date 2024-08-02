@@ -1,4 +1,4 @@
-package me.dio.dtos;
+package me.dio.dtos.pedido;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -11,14 +11,12 @@ import java.util.List;
 @Setter
 @Getter
 public class PedidoDTO {
-    private Integer clienteId;
-    private String clienteNome;
+    private Integer userId;
     private List<PedidoItemDTO> itens;
 
     public static PedidoDTO fromEntity(Pedido pedido) {
         PedidoDTO pedidoDTO = new PedidoDTO();
-        pedidoDTO.setClienteId(pedido.getCliente().getId());
-        pedidoDTO.setClienteNome(pedido.getCliente().getNome());
+        pedidoDTO.setUserId(pedido.getUser().getId());
         List<PedidoItemDTO> itens = new ArrayList<>();
 
         for(PedidoItem pedidoItem : pedido.getItens()) {

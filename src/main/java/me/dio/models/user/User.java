@@ -3,6 +3,7 @@ package me.dio.models.user;
 import jakarta.persistence.*;
 import lombok.*;
 import me.dio.enums.UserRole;
+import me.dio.dtos.UserCreateDTO;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -20,10 +21,11 @@ import java.util.List;
 public class User implements UserDetails {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
     private String login;
     private String nome;
+    private String email;
     private String password;
     @Enumerated(EnumType.STRING)
     private UserRole role;
@@ -33,6 +35,10 @@ public class User implements UserDetails {
         this.nome = nome;
         this.password = encryptedPassword;
         this.role = userRole;
+    }
+
+    public static User fromDTO(UserCreateDTO userDTO) {
+        return new User();
     }
 
     @Override

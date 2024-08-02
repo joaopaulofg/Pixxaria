@@ -1,11 +1,11 @@
 package me.dio.controllers;
 
 import jakarta.validation.Valid;
-import me.dio.dtos.LoginResponseDTO;
+import me.dio.dtos.authentication.LoginResponseDTO;
 import me.dio.infra.security.TokenService;
 import me.dio.models.user.User;
-import me.dio.dtos.AuthenticationDTO;
-import me.dio.dtos.RegisterDTO;
+import me.dio.dtos.authentication.AuthenticationDTO;
+import me.dio.dtos.authentication.RegisterDTO;
 import me.dio.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

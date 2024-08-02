@@ -1,7 +1,8 @@
 package me.dio.controllers;
 
 import jakarta.validation.Valid;
-import me.dio.dtos.PedidoDTO;
+import me.dio.dtos.pedido.PedidoDTO;
+import me.dio.dtos.pedido.PedidoResponseDTO;
 import me.dio.models.Pedido;
 import me.dio.enums.Status;
 import me.dio.services.PedidoService;

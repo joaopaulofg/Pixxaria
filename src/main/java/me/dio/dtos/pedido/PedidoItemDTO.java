@@ -1,10 +1,8 @@
-package me.dio.dtos;
+package me.dio.dtos.pedido;
 
 import lombok.Getter;
 import lombok.Setter;
 import me.dio.models.PedidoItem;
-
-import java.util.List;
 
 @Setter
 @Getter

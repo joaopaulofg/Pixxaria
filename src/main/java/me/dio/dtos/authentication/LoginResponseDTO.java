@@ -1,4 +1,4 @@
-package me.dio.dtos;
+package me.dio.dtos.authentication;
 
 public record LoginResponseDTO(String token) {
 }

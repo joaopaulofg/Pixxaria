@@ -1,17 +1,14 @@
 package me.dio.services;
 
-import me.dio.dtos.PedidoDTO;
-import me.dio.dtos.PedidoItemDTO;
+import me.dio.dtos.pedido.PedidoDTO;
+import me.dio.dtos.pedido.PedidoItemDTO;
 import me.dio.enums.Status;
 import me.dio.exceptions.ResourceNotFoundException;
-import me.dio.models.Cliente;
+import me.dio.models.user.User;
 import me.dio.models.Pedido;
 import me.dio.models.PedidoItem;
 import me.dio.models.Pizza;
-import me.dio.repositories.ClienteRepository;
-import me.dio.repositories.PedidoRepository;
-import me.dio.repositories.PizzaPrecoRepository;
-import me.dio.repositories.PizzaRepository;
+import me.dio.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,7 +24,7 @@ public class PedidoService {
     private PedidoRepository pedidoRepository;
 
     @Autowired
-    private ClienteRepository clienteRepository;
+    private UserRepository userRepository;
 
     @Autowired
     private PizzaRepository pizzaRepository;
@@ -38,10 +35,10 @@ public class PedidoService {
     private PizzaPrecoRepository pizzaPrecoRepository;
 
     public Pedido criarPedido(PedidoDTO pedidoDTO) {
-        Cliente cliente = clienteRepository.findById(pedidoDTO.getClienteId()).orElseThrow(() -> new ResourceNotFoundException("Cliente com id " + pedidoDTO.getClienteId() + " nao cadastrado."));
+        User user = userRepository.findById(pedidoDTO.getUserId()).orElseThrow(() -> new ResourceNotFoundException("Cliente com id " + pedidoDTO.getUserId() + " nao cadastrado."));
 
         Pedido pedido = new Pedido();
-        pedido.setCliente(cliente);
+        pedido.setUser(user);
 
         List<PedidoItem> itens = new ArrayList<>();
 
@@ -59,6 +56,7 @@ public class PedidoService {
         pedido.setDataCriacao(new Date());
         pedido.setValorTotal(calculaValorTotal(itens));
 
+
         return pedidoRepository.save(pedido);
     }
 
@@ -66,8 +64,8 @@ public class PedidoService {
         return itens.stream().mapToDouble(item -> item.getPizza().getPreco() * item.getQuantidade()).sum();
     }
 
-    public List<PedidoDTO> historicoCliente(Cliente cliente) {
-        List<Pedido> pedidos = pedidoRepository.findByCliente(cliente);
+    public List<PedidoDTO> historicoCliente(User user) {
+        List<Pedido> pedidos = pedidoRepository.findByUser(user);
         return pedidos.stream().map(PedidoDTO::fromEntity).collect(Collectors.toList());
     }
 
