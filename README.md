@@ -1,6 +1,6 @@
 # Sistema de Pixxaria
 
-Um sistema de gerenciamento para pizzarias desenvolvido com Java, Spring Boot e utilizando JPA e MySQL para persistência. O projeto permite que clientes façam pedidos, enquanto os funcionários podem gerenciar o cardápio e os pedidos.
+Um sistema de gerenciamento para pizzarias desenvolvido com Java, Spring Boot, JPA e MySQL para persistência, além do Spring Security e JWT para implementação da lógica de segurança, autenticação e autorização da API. O projeto permite que clientes façam pedidos, enquanto os funcionários podem gerenciar o cardápio e os pedidos.
 
 ## Tecnologias Utilizadas
 
@@ -64,11 +64,11 @@ Um sistema de gerenciamento para pizzarias desenvolvido com Java, Spring Boot e 
   - `PUT /pedidos/{idPedido}` - Atualizar o status de um pedido
 
 - **Pizza**
-  - `POST /pizzas` - Adicionar uma nova pizza ao cardápio.
+  - `POST /pizzas` - Adicionar uma nova pizza ao cardápio. (Apenas usuários com a role FUNCIONARIO têm autorização)
   - `GET /pizzas/{idPizza}` - Consultar detalhes de uma pizza.
   - `GET /pizzas` - Listar o cardápio com as pizzas cadastradas.
-  - `DELETE /pizzas/{idPizza}` - Deletar uma pizza do cardápio.
-  - `PUT /pizzas/{idPizza}` - Atualizar uma pizza no cardápio.
+  - `DELETE /pizzas/{idPizza}` - Deletar uma pizza do cardápio. (Apenas usuários com a role FUNCIONARIO têm autorização)
+  - `PUT /pizzas/{idPizza}` - Atualizar uma pizza no cardápio. (Apenas usuários com a role FUNCIONARIO têm autorização)
 
 
 ## Licença
