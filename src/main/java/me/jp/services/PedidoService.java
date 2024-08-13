@@ -58,7 +58,7 @@ public class PedidoService {
         pedido.setValorTotal(calculaValorTotal(itens));
         pedidoRepository.save(pedido);
 
-        return new PedidoResponseDTO(user.getLogin(), user.getNome(), itens);
+        return new PedidoResponseDTO(user.getLogin(), user.getNome(), itens, pedido.getStatus(), pedido.getValorTotal());
     }
 
     private Double calculaValorTotal(List<PedidoItem> itens) {
@@ -70,14 +70,18 @@ public class PedidoService {
         return pedidos.stream().map(PedidoDTO::fromEntity).collect(Collectors.toList());
     }
 
-    public Pedido atualizarPedido(Integer idPedido, Status novoStatus) {
+    public PedidoResponseDTO atualizarPedido(Integer idPedido, Status novoStatus) {
         Pedido pedido = pedidoRepository.findById(idPedido).orElseThrow(() -> new ResourceNotFoundException("Pedido com id " + idPedido + " nao encontrado."));
+        System.out.println(novoStatus);
         pedido.setStatus(novoStatus);
-        return pedidoRepository.save(pedido);
+        System.out.println(pedido.getStatus());
+        pedidoRepository.save(pedido);
+        return new PedidoResponseDTO(pedido.getUser().getLogin(), pedido.getUser().getNome(), pedido.getItens(), pedido.getStatus(), pedido.getValorTotal());
     }
 
-    public PedidoDTO consultarPedido(Integer idPedido) {
+    public PedidoResponseDTO consultarPedido(Integer idPedido) {
         Pedido pedido = pedidoRepository.findById(idPedido).orElseThrow(() -> new ResourceNotFoundException("Pedido nao encontrado."));
-        return PedidoDTO.fromEntity(pedido);
+
+        return new PedidoResponseDTO(pedido.getUser().getLogin(), pedido.getUser().getNome(), pedido.getItens(), pedido.getStatus(), pedido.getValorTotal());
     }
 }

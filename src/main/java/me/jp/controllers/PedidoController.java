@@ -31,7 +31,7 @@ public class PedidoController {
     @GetMapping("/{idPedido}")
     public ResponseEntity<?> consultarPedido(@PathVariable Integer idPedido) {
         try {
-            PedidoDTO pedido = pedidoService.consultarPedido(idPedido);
+            PedidoResponseDTO pedido = pedidoService.consultarPedido(idPedido);
             return ResponseEntity.ok(pedido);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
@@ -39,9 +39,9 @@ public class PedidoController {
     }
 
     @PutMapping("/{idPedido}")
-    public ResponseEntity<?> atualizarPedido(@PathVariable Integer idPedido, Status novoStatus) {
+    public ResponseEntity<?> atualizarPedido(@PathVariable Integer idPedido, @RequestBody Status novoStatus) {
         try {
-            Pedido pedidoAtualizado = pedidoService.atualizarPedido(idPedido, novoStatus);
+            PedidoResponseDTO pedidoAtualizado = pedidoService.atualizarPedido(idPedido, novoStatus);
             return ResponseEntity.ok(pedidoAtualizado);
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
