@@ -72,16 +72,13 @@ public class PedidoService {
 
     public PedidoResponseDTO atualizarPedido(Integer idPedido, Status novoStatus) {
         Pedido pedido = pedidoRepository.findById(idPedido).orElseThrow(() -> new ResourceNotFoundException("Pedido com id " + idPedido + " nao encontrado."));
-        System.out.println(novoStatus);
         pedido.setStatus(novoStatus);
-        System.out.println(pedido.getStatus());
         pedidoRepository.save(pedido);
         return new PedidoResponseDTO(pedido.getUser().getLogin(), pedido.getUser().getNome(), pedido.getItens(), pedido.getStatus(), pedido.getValorTotal());
     }
 
     public PedidoResponseDTO consultarPedido(Integer idPedido) {
         Pedido pedido = pedidoRepository.findById(idPedido).orElseThrow(() -> new ResourceNotFoundException("Pedido nao encontrado."));
-
         return new PedidoResponseDTO(pedido.getUser().getLogin(), pedido.getUser().getNome(), pedido.getItens(), pedido.getStatus(), pedido.getValorTotal());
     }
 }
