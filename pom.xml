@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>me.dio</groupId>
-	<artifactId>santander-bootcamp-java-pixxaria</artifactId>
+	<artifactId>pixxaria</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>santander-bootcamp-java</name>
 	<description>Java RESTful API criada nos estudos do Bootcamp Santander 2024 - Backend com Java</description>
