@@ -38,9 +38,14 @@ public class PizzaService {
         return pizzaRepository.findById(idPizza).orElseThrow(() -> new ResourceNotFoundException("Pizza nao encontrada com o ID " + idPizza));
     }
 
-    public void deletarPizza(Integer idPizza) {
+    public Pizza deletarPizza(Integer idPizza) {
         if(pizzaRepository.findById(idPizza).isPresent()) {
-            pizzaRepository.deleteById(idPizza);
+
+            Pizza pizza = pizzaRepository.findById(idPizza).orElseThrow(() -> new ResourceNotFoundException("Pizza não encontrada"));
+
+            pizza.setDisponivel(false);
+            pizzaRepository.save(pizza);
+            return pizza;
         } else {
             throw new ResourceNotFoundException("Pizza nao encontrada com o ID " + idPizza);
         }

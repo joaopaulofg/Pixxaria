@@ -46,8 +46,8 @@ public class PizzaController {
     @DeleteMapping("/{idPizza}")
     public ResponseEntity<Pizza> deletarPizza(@PathVariable Integer idPizza) {
         try {
-            pizzaService.deletarPizza(idPizza);
-            return ResponseEntity.ok().build();
+            Pizza pizzaDeletada = pizzaService.deletarPizza(idPizza);
+            return ResponseEntity.ok(pizzaDeletada);
         } catch (Exception e) {
             return ResponseEntity.badRequest().build();
         }
