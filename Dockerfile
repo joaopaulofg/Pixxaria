@@ -1,14 +1,13 @@
-# Usando a imagem do JDK 17
-FROM openjdk:17-jdk-slim
-
-# Definindo o diretório de trabalho
+# Estágio de construção
+FROM maven:3.8.4-openjdk-17-slim AS build
 WORKDIR /app
+COPY pom.xml .
+COPY src ./src
+RUN mvn clean package -DskipTests
 
-# Copiando o jar gerado para dentro do container
-COPY target/pixxaria-0.0.1-SNAPSHOT.jar /app/app.jar
-
-# Expondo a porta em que a aplicação vai rodar (se necessário)
+# Estágio final
+FROM openjdk:17-jdk-slim
+WORKDIR /app
+COPY --from=build /app/target/pixxaria-0.0.1-SNAPSHOT.jar /app/app.jar
 EXPOSE 8080
-
-# Comando para executar a aplicação
 CMD ["java", "-jar", "/app/app.jar"]
